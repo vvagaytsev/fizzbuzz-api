@@ -15,12 +15,12 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api")
-public class FizBuzzController {
+public class FizzBuzzController {
 
     private final FizzBuzzService fizzBuzzService;
 
     @Autowired
-    public FizBuzzController(FizzBuzzService fizzBuzzService) {
+    public FizzBuzzController(FizzBuzzService fizzBuzzService) {
         this.fizzBuzzService = fizzBuzzService;
     }
 
