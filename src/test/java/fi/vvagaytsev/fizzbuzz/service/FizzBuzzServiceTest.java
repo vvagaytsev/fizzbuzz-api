@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals;
  * @author Vladimir Vagaytsev
  * Date: 09/08/2018
  */
-public class FizzBuzServiceTest {
+public class FizzBuzzServiceTest {
 
     private final FizzBuzzService fizzBuzzService = new FizzBuzzService();
     private final Random random = new Random();
