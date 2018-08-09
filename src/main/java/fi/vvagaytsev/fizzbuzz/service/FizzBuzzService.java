@@ -15,14 +15,14 @@ import java.util.stream.Collectors;
 public class FizzBuzzService {
 
     @Nonnull
-    public List<String> map(@Nonnull List<Long> numbers) {
+    public List<String> fizzBuzzify(@Nonnull List<Long> numbers) {
         return numbers.stream()
                 .map(this::fizzBuzzify)
                 .collect(Collectors.toList());
     }
 
     @Nonnull
-    private String fizzBuzzify(@Nonnull @Nonnegative Long number) {
+    public String fizzBuzzify(@Nonnull @Nonnegative Long number) {
         if (isDivisibleBy(number, 15)) {
             return "FizzBuzz";
         }

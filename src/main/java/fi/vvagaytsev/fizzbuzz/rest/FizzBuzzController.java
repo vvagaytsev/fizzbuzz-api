@@ -36,6 +36,6 @@ public class FizzBuzzController {
                                  @NotNull
                                  @Size(min = 1, max = 100)
                                  List<@NotNull @Positive Long> numbers) {
-        return fizzBuzzService.map(numbers);
+        return fizzBuzzService.fizzBuzzify(numbers);
     }
 }

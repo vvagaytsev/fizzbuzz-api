@@ -39,7 +39,7 @@ public class FizzBuzServiceTest {
                 "14",
                 "FizzBuzz"
         );
-        List<String> actual = fizzBuzzService.map(numbers);
+        List<String> actual = fizzBuzzService.fizzBuzzify(numbers);
 
         assertEquals(expected, actual);
     }
@@ -52,7 +52,7 @@ public class FizzBuzServiceTest {
         }
 
         List<Long> fizzNumbers = Collections.singletonList(randomFizz);
-        List<String> actual = fizzBuzzService.map(fizzNumbers);
+        List<String> actual = fizzBuzzService.fizzBuzzify(fizzNumbers);
         List<String> expected = Collections.singletonList("Fizz");
 
         assertEquals(expected, actual);
@@ -66,7 +66,7 @@ public class FizzBuzServiceTest {
         }
 
         List<Long> buzzNumbers = Collections.singletonList(randomBuzz);
-        List<String> actual = fizzBuzzService.map(buzzNumbers);
+        List<String> actual = fizzBuzzService.fizzBuzzify(buzzNumbers);
         List<String> expected = Collections.singletonList("Buzz");
 
         assertEquals(expected, actual);
@@ -76,7 +76,7 @@ public class FizzBuzServiceTest {
     public void testRandomFizzBuzz() {
         long randomFizzBuzz = 15 * nextPositiveRandom();
         List<Long> fizzBuzzNumbers = Collections.singletonList(randomFizzBuzz);
-        List<String> actual = fizzBuzzService.map(fizzBuzzNumbers);
+        List<String> actual = fizzBuzzService.fizzBuzzify(fizzBuzzNumbers);
         List<String> expected = Collections.singletonList("FizzBuzz");
 
         assertEquals(expected, actual);
