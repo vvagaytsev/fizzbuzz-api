@@ -1,0 +1,31 @@
+# Actuator config
+management:
+  endpoints.web:
+    # include all available actuator endpoints by default
+    exposure.include: "*"
+  # always display the detailed health checks
+  endpoint.health.show-details: always
+  # set management.metrics.binders.* to enable/disable certain groups of metrics
+  # all binders are enabled by default
+  # spring integration can be disabled because we don't use it here
+  metrics.binders.integration.enabled: false
+
+# Customized info endpoint to show more details on the runtime
+info:
+  java:
+    name: ${java.specification.name}
+    vendor: ${java.specification.vendor}
+    version: ${java.specification.version}
+  java-vm-spec:
+    name: ${java.vm.specification.name}
+    vendor: ${java.vm.specification.vendor}
+    version: ${java.vm.specification.version}
+  java-vm:
+    name: ${java.vm.name}
+    vendor: ${java.vm.vendor}
+    version: ${java.vm.version}
+    info: ${java.vm.info}
+  java-runtime:
+    name: ${java.runtime.name}
+    version: ${java.runtime.version}
+# End of actuator config
