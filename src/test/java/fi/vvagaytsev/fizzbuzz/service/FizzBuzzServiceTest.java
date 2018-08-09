@@ -24,7 +24,8 @@ public class FizzBuzzServiceTest {
     public void testFirst15Numbers() {
         List<Long> numbers = LongStream.rangeClosed(1, 15).boxed().collect(Collectors.toList());
         List<String> expected = Arrays.asList(
-                "1", "2",
+                "1",
+                "2",
                 "Fizz",
                 "4",
                 "Buzz",
