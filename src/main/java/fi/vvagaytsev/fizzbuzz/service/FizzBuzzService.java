@@ -2,6 +2,7 @@ package fi.vvagaytsev.fizzbuzz.service;
 
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,7 +22,7 @@ public class FizzBuzzService {
     }
 
     @Nonnull
-    private String fizzBuzzify(@Nonnull Long number) {
+    private String fizzBuzzify(@Nonnull @Nonnegative Long number) {
         if (isDivisibleBy(number, 15)) {
             return "FizzBuzz";
         }
