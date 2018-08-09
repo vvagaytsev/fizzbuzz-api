@@ -1,6 +1,7 @@
 package fi.vvagaytsev.fizzbuzz.rest;
 
 import fi.vvagaytsev.fizzbuzz.service.FizzBuzzService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +14,7 @@ import java.util.List;
  * @author Vladimir Vagaytsev
  * Date: 09/08/2018
  */
+@Api(description = "FizzBuzz API")
 @RestController
 @RequestMapping("/api")
 public class FizzBuzzController {
