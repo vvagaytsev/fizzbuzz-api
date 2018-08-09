@@ -3,6 +3,7 @@ package fi.vvagaytsev.fizzbuzz;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
 
 /**
@@ -26,5 +27,10 @@ public class FizzBuzzApplication {
         filter.setBeforeMessagePrefix("INCOMING REQUEST : ");
         filter.setAfterMessagePrefix("REQUEST DATA : ");
         return filter;
+    }
+
+    @Bean
+    public MethodValidationPostProcessor methodValidationPostProcessor() {
+        return new MethodValidationPostProcessor();
     }
 }
