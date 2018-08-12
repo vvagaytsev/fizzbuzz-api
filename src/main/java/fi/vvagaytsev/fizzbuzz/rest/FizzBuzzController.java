@@ -1,27 +1,19 @@
 package fi.vvagaytsev.fizzbuzz.rest;
 
 import fi.vvagaytsev.fizzbuzz.service.FizzBuzzService;
-import io.swagger.annotations.Api;
+import java.util.stream.LongStream;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
-import java.util.List;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
+import reactor.core.scheduler.Schedulers;
 
 /**
  * @author Vladimir Vagaytsev
  * Date: 09/08/2018
  */
-@Api(description = "FizzBuzz API")
 @RestController
 @RequestMapping("/api")
-@Validated
 public class FizzBuzzController {
 
     private final FizzBuzzService fizzBuzzService;
@@ -31,11 +23,20 @@ public class FizzBuzzController {
         this.fizzBuzzService = fizzBuzzService;
     }
 
-    @PostMapping("/fizz-buzz")
-    public List<String> fizzBuzz(@RequestBody
-                                 @NotNull
-                                 @Size(min = 1, max = 100)
-                                 List<@NotNull @Positive Long> numbers) {
-        return fizzBuzzService.fizzBuzzify(numbers);
+    @PostMapping(value = "/fizz-buzz", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<String> fizzBuzz(@RequestBody Flux<Long> numbers) {
+        return numbers
+                .map(fizzBuzzService::fizzBuzzify)
+                .subscribeOn(Schedulers.elastic())
+                .log();
+    }
+
+    @GetMapping(value = "/fizz-buzz-range/{start}/{end}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<String> fizzBuzzRange(@PathVariable("start") Long start,
+                                      @PathVariable("end") Long end) {
+        return Flux.fromStream(LongStream.rangeClosed(start, end).boxed())
+                .map(fizzBuzzService::fizzBuzzify)
+                .subscribeOn(Schedulers.elastic())
+                .log();
     }
 }
