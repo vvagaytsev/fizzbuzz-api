@@ -23,7 +23,11 @@ public class FizzBuzzController {
         this.fizzBuzzService = fizzBuzzService;
     }
 
-    @PostMapping(value = "/fizz-buzz", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    @PostMapping(
+            value = "/fizz-buzz",
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_STREAM_JSON_VALUE},
+            produces = MediaType.TEXT_EVENT_STREAM_VALUE
+    )
     public Flux<String> fizzBuzz(@RequestBody Flux<Long> numbers) {
         return numbers
                 .map(fizzBuzzService::fizzBuzzify)
@@ -31,7 +35,10 @@ public class FizzBuzzController {
                 .log();
     }
 
-    @GetMapping(value = "/fizz-buzz-range/{start}/{end}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    @GetMapping(
+            value = "/fizz-buzz-range/{start}/{end}",
+            produces = MediaType.TEXT_EVENT_STREAM_VALUE
+    )
     public Flux<String> fizzBuzzRange(@PathVariable("start") Long start,
                                       @PathVariable("end") Long end) {
         return Flux.fromStream(LongStream.rangeClosed(start, end).boxed())
